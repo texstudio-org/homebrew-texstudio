@@ -38,9 +38,11 @@ cask "texstudio@beta" do
 
   # Although the app names differ, they share the same Bundle ID `texstudio`, so strictly speaking,
   # they still conflict with each other.
-  conflicts_with cask: "Homebrew/cask/texstudio"
-  conflicts_with cask: "texstudio-org/texstudio/texstudio"
-  conflicts_with cask: "texstudio-org/texstudio/texstudio@all"
+  conflicts_with cask: [
+    "Homebrew/cask/texstudio",
+    "texstudio-org/texstudio/texstudio",
+    "texstudio-org/texstudio/texstudio@all",
+  ]
   depends_on macos: :ventura
 
   # It's NOT recommended to rename the target only for removing version numbers.
