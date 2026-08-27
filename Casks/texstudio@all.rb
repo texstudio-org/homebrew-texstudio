@@ -30,9 +30,11 @@ cask "texstudio@all" do
     end
   end
 
-  conflicts_with cask: "Homebrew/cask/texstudio"
-  conflicts_with cask: "texstudio-org/texstudio/texstudio"
-  conflicts_with cask: "texstudio-org/texstudio/texstudio@beta"
+  conflicts_with cask: [
+    "Homebrew/cask/texstudio",
+    "texstudio-org/texstudio/texstudio",
+    "texstudio-org/texstudio/texstudio@beta",
+  ]
   depends_on macos: :ventura
 
   app "texstudio-#{version}-osx#{arch}.app"
