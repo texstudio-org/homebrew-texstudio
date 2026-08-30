@@ -1,5 +1,3 @@
-# texstudio cask: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/t/texstudio.rb
-
 cask "texstudio@beta" do
   arch arm: "-m1"
 
