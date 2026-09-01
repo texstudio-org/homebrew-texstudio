@@ -5,8 +5,7 @@ cask "texstudio@all" do
   sha256 arm:   "a405c998ec2d121a46c3edb9aa344187c5466d90ac341d8cbe401a87ac9f0534",
          intel: "5e0c2effd3c12ae2aee266349deb082ff98d8d5b16de84621a850f3367330135"
 
-  url "https://github.com/texstudio-org/texstudio/releases/download/#{version}/texstudio-#{version}-osx#{arch}.zip",
-      verified: "github.com/texstudio-org/texstudio/"
+  url "https://github.com/texstudio-org/texstudio/releases/download/#{version}/texstudio-#{version}-osx#{arch}.zip"
   name "TeXstudio"
   desc "Fully featured LaTeX editor, both stable and beta versions"
   homepage "https://texstudio.org/"
