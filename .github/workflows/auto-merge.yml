@@ -26,7 +26,7 @@ jobs:
       - name: Try to merge
         # trick actionlint's "Constant conditions at `if:`" check
         # https://github.com/rhysd/actionlint/blob/v1.7.12/docs/checks.md#constant-conditions-at-if
-        if: contains(github.repository, 'homebrew')
+        if: "! contains(github.repository, 'homebrew')"
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
