@@ -1,5 +1,5 @@
 # based on https://github.com/TeX-Live/setup-texlive-action/blob/main/.github/workflows/dependabot.yml
-name: auto merge PR
+name: auto merge
 
 on:
   workflow_run:
@@ -11,17 +11,20 @@ permissions:
   pull-requests: write
 
 jobs:
-  dependabot:
+  auto-merge:
     runs-on: ubuntu-latest
     if: |
       github.event.workflow_run.event == 'pull_request' &&
-      github.event.workflow_run.conclusion == 'success' &&
-      contains(
-        fromJSON('["github-actions[bot]", "dependabot[bot]"]'),
-        github.event.sender.login
-      )
+      github.event.workflow_run.conclusion == 'success'
     steps:
+      - name: Dump event payload
+        env:
+          EVENT: ${{ toJSON(github.event) }}
+        run:
+          echo "$EVENT"
+
       - name: Try to merge
+        if: false
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
