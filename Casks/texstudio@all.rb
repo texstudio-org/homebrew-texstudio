@@ -5,19 +5,6 @@ cask "texstudio@all" do
   sha256 arm:   "a10bafe00d47a64db5a25fe0c0bd0317e1ccfc2d84acaf3388ed34a4f123dc3b",
          intel: "4b598d4b5af805350ce1a9dc66f259175446472b72a765a1b7dd843f04b6e381"
 
-  on_arm do
-    postflight_steps do
-      run "xattr",
-          args: ["-dr", "com.apple.quarantine", "{{appdir}}/texstudio-{{version}}-osx-m1.app"]
-    end
-  end
-  on_intel do
-    postflight_steps do
-      run "xattr",
-          args: ["-dr", "com.apple.quarantine", "{{appdir}}/texstudio-{{version}}-osx.app"]
-    end
-  end
-
   url "https://github.com/texstudio-org/texstudio/releases/download/#{version}/texstudio-#{version}-osx#{arch}.zip"
   name "TeXstudio"
   desc "Fully featured LaTeX editor, both stable and beta versions"
@@ -50,6 +37,11 @@ cask "texstudio@all" do
   depends_on macos: :ventura
 
   app "texstudio-#{version}-osx#{arch}.app"
+
+  postflight_steps do
+    run "xattr",
+        args: ["-dr", "com.apple.quarantine", "{{appdir}}/texstudio-{{version}}-osx{{arch}}.app"]
+  end
 
   uninstall quit: "texstudio"
 
