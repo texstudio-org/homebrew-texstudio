@@ -36,6 +36,10 @@ jobs:
         uses: Homebrew/actions/git-user-config@3cdb78d0f62ad29dd32de765782654f4eedea607 # 2026.08.31.1
 
       - name: Bump casks
+        # `brew bump` may fail if the same-named feature branch already
+        # exists, which can happen when pushing to `main` while there are
+        # open version bump PRs.
+        continue-on-error: ${{ github.event_name == 'push' }}
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.HOMEBREW_GITHUB_API_TOKEN || secrets.GITHUB_TOKEN }}
           HOMEBREW_GIT_COMMITTER_NAME: ${{ steps.git_setup.outputs.name }}
