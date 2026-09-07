@@ -5,21 +5,6 @@ cask "texstudio@beta" do
   sha256 arm:   "a10bafe00d47a64db5a25fe0c0bd0317e1ccfc2d84acaf3388ed34a4f123dc3b",
          intel: "4b598d4b5af805350ce1a9dc66f259175446472b72a765a1b7dd843f04b6e381"
 
-  # learnt from https://github.com/Homebrew/homebrew-cask/blob/03a0edb4616198f6f64b285dbf842bc3b73a7f31/Casks/p/parallels.rb#L36-L41
-  # and https://github.com/Homebrew/homebrew-cask/commit/adfc07a7bc28a32037851be4d7a0bd4f8b239565
-  on_arm do
-    postflight_steps do
-      run "xattr",
-          args: ["-dr", "com.apple.quarantine", "{{appdir}}/texstudio-{{version}}-osx-m1.app"]
-    end
-  end
-  on_intel do
-    postflight_steps do
-      run "xattr",
-          args: ["-dr", "com.apple.quarantine", "{{appdir}}/texstudio-{{version}}-osx.app"]
-    end
-  end
-
   url "https://github.com/texstudio-org/texstudio/releases/download/#{version}/texstudio-#{version}-osx#{arch}.zip"
   name "TeXstudio"
   desc "Fully featured LaTeX editor, beta version"
@@ -60,6 +45,13 @@ cask "texstudio@beta" do
   # It's NOT recommended to rename the target only for removing version numbers.
   # https://docs.brew.sh/Cask-Cookbook#target-should-only-be-used-in-select-cases
   app "texstudio-#{version}-osx#{arch}.app"
+
+  # learnt from https://github.com/Homebrew/homebrew-cask/blob/03a0edb4616198f6f64b285dbf842bc3b73a7f31/Casks/p/parallels.rb#L36-L41
+  # and https://github.com/Homebrew/homebrew-cask/commit/adfc07a7bc28a32037851be4d7a0bd4f8b239565
+  postflight_steps do
+    run "xattr",
+        args: ["-dr", "com.apple.quarantine", "{{appdir}}/texstudio-{{version}}-osx{{arch}}.app"]
+  end
 
   # Check Bundle ID with `brew list-running-app-ids`. Locally cloned cask tap needed, run
   # `brew tap --force homebrew/cask`.
