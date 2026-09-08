@@ -8,8 +8,8 @@ on:
     paths:
       - .github/workflows/autobump.yml
   schedule:
-    # Every day at 02:30, 05:30, 08:30, etc. UTC
-    - cron: 30 2/3 * * *
+    # Every day at 11:30 UTC
+    - cron: 30 11 * * *
   # NOTE: added `workflow_dispatch` event for debugging
   workflow_dispatch:
 
