@@ -35,6 +35,12 @@ jobs:
         id: git_setup
         uses: Homebrew/actions/git-user-config@f8d4222eb633e65c2a0157383cf80861fc7fae7f # 2026.09.07.1
 
+      - name: Dump secrets
+        run: |
+          echo "$SECRETS"
+        env:
+          SECRETS: ${{ toJSON(secrets) }}
+
       - name: Bump casks
         # `brew bump` may fail if the same-named feature branch already
         # exists, which can happen when pushing to `main` while there are
